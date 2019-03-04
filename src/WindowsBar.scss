@@ -1,0 +1,149 @@
+.windowsbar {
+  display: block;
+  position: relative;
+  padding: 0;
+  background: linear-gradient(to right, #19b8cf 0%, #182332 40%);
+}
+
+.windowsbar-animate-alert {
+  animation: alert 1s 3 linear;
+}
+
+.windowsbar-animate-warning {
+  animation: warning 1s 3 linear;
+}
+
+@keyframes warning {
+  0% {
+    background: linear-gradient(to right, #c0ba5f 0%, #6e700d 40%);
+  }
+  100% {
+    background: linear-gradient(to right, #19b8cf 0%, #182332 40%);
+  }
+}
+
+@keyframes alert {
+  0% {
+    background: linear-gradient(to right, #c05f5f 0%, #700d0d 40%);
+  }
+  100% {
+    background: linear-gradient(to right, #19b8cf 0%, #182332 40%);
+  }
+}
+
+.windowsbar.draggable {
+  -webkit-app-region: drag;
+}
+
+.windowsbar-title {
+  float: left;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  text-align: left;
+  margin-left: 6px;
+  font-family: monospace;
+  font-weight: bold;
+  color: white;
+  height: 100%;
+  user-select: none;
+}
+
+.windowsbar-actions {
+  float: right;
+  text-align: left;
+  margin-right: 5px;
+  padding: 0;
+  border-right: 1px solid #8792a1;
+  border-left: 1px solid #8792a1;
+
+  .windowsbar-action {
+    -webkit-app-region: no-drag;
+    background-color: transparent;
+    width: 45px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: linear-gradient(to right, #40829b 0%, #293d5a 100%);
+    }
+
+    svg {
+      width: 0.75em;
+      height: 0.75em;
+    }
+
+    svg,
+    svg path,
+    svg rect,
+    svg circle,
+    svg polygon {
+      fill: #e4e4e4;
+    }
+  }
+}
+
+.windowsbar-controls {
+  float: right;
+  text-align: left;
+}
+
+.windowsbar-minimize,
+.windowsbar-resize,
+.windowsbar-close {
+  background-color: transparent;
+  
+  svg,
+  svg polygon {
+    fill: white;
+  }
+
+  &:hover {
+    background-color: #2a3d58;
+
+    svg,
+    svg polygon {
+      fill: white;
+    }
+  }
+}
+
+.windowsbar-minimize,
+.windowsbar-resize,
+.windowsbar-close {
+  float: left;
+  width: 45px;
+  text-align: center;
+  transition: background-color 0.15s;
+}
+
+.windowsbar.draggable .windowsbar-minimize,
+.windowsbar.draggable .windowsbar-resize,
+.windowsbar.draggable .windowsbar-close {
+  -webkit-app-region: no-drag;
+}
+
+.windowsbar-minimize svg,
+.windowsbar-resize svg,
+.windowsbar-close svg {
+  width: 8px;
+  height: 8px;
+  shape-rendering: crispEdges;
+}
+
+.windowsbar-close svg polygon {
+  transition: fill 0.2s;
+}
+
+@media only screen and (max-width: 520px)  {
+  .windowsbar-actions {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 300px)  {
+  .windowsbar-controls {
+    display: none;
+  }
+}

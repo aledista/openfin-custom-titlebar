@@ -1,0 +1,19 @@
+{
+    "licenseKey": "custom-title-bar",
+    "runtime": {
+        "version": "9.61.36.36"
+    },
+    "startup_app": {
+        "name": "CustomTitleBar",
+        "uuid": "11ee9062-9eb0-4875-b819-c90f38ef03ea",
+        "url": "http://localhost:3000",
+        "autoShow": true,
+        "defaultCentered": true,
+        "defaultWidth": 500,
+        "defaultHeight": 300,
+        "saveWindowState": false,
+        "frame": false,
+        "resizable": true
+    },
+    "shortcut": {}
+}
