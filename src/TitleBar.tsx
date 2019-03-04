@@ -1,58 +1,57 @@
 // libs
 import React, { useState, useEffect, useRef } from "react";
 import classNames from "classnames";
-import Signal, { ISignal, SignalType } from "./Signal";
+import { ISignal, SignalType } from "./Signal";
 
 // components
 import { MinimizeControl, ResizeControl, CloseControl, IActionProps } from "./Controls";
 // styles
-import "./WindowsBar.scss";
+import "./TitleBar.scss";
 
 declare global {
   interface Window { fin: any; }
 }
 const currentWindow = (window.fin) ? window.fin.desktop.Window.getCurrent() : undefined;
 
-interface IWindowsBarProps {
+interface ITitleBarProps {
   children?: React.FC<IActionProps>[] | React.FC<IActionProps>;
   title?: string;
   signal: ISignal;
-  warning: boolean;
-  size: WindowsBarSize;
+  size: TitleBarSize;
 }
 
-export enum WindowsBarSize {
+export enum TitleBarSize {
   Small,
   Medium,
   Big
 }
 
-const WindowsBarHeight = {
-  [WindowsBarSize.Small]: 16,
-  [WindowsBarSize.Medium]: 19,
-  [WindowsBarSize.Big]: 25
+const TitleBarHeight = {
+  [TitleBarSize.Small]: 16,
+  [TitleBarSize.Medium]: 19,
+  [TitleBarSize.Big]: 25
 }
 
-const WindowsBarTitleSize = {
-  [WindowsBarSize.Small]: 13,
-  [WindowsBarSize.Medium]: 16,
-  [WindowsBarSize.Big]: 19
+const TitleBarTitleSize = {
+  [TitleBarSize.Small]: 13,
+  [TitleBarSize.Medium]: 16,
+  [TitleBarSize.Big]: 19
 }
 
-const WindowsBarCssClasses: any = {
-  [SignalType.alert]: "windowsbar-animate-alert",
-  [SignalType.warning]: "windowsbar-animate-warning"
+const TitleBarCssClasses: any = {
+  [SignalType.alert]: "titlebar-animate-alert",
+  [SignalType.warning]: "titlebar-animate-warning"
 }
 
-const WindowsBar: React.FC<IWindowsBarProps> = ({ children, title, size, signal }) => {
+const TitleBar: React.FC<ITitleBarProps> = ({ children, title, size, signal }) => {
   const [isMaximized, setIsMaximized] = useState<boolean>(false);
-  const windowsBarHeight = WindowsBarHeight[size];
-  const titleBarFontSize = WindowsBarTitleSize[size];
-  const windowsbarClassObj: any = { windowsbar: true, draggable: true };
+  const windowsBarHeight = TitleBarHeight[size];
+  const titleBarFontSize = TitleBarTitleSize[size];
+  const titlebarClassObj: any = { titlebar: true, draggable: true };
   if (signal) {
-    windowsbarClassObj[WindowsBarCssClasses[signal.type]] = true;
+    titlebarClassObj[TitleBarCssClasses[signal.type]] = true;
   }
-  const windowsbarClassNames = classNames(windowsbarClassObj);
+  const titlebarClassNames = classNames(titlebarClassObj);
 
   const close = () => {
     currentWindow.close();
@@ -72,30 +71,30 @@ const WindowsBar: React.FC<IWindowsBarProps> = ({ children, title, size, signal 
   };
 
   useEffect(() => {
-    if (signal) {
+    if (signal != undefined) {
         signal.soundPlayer.play();
     }
   });
 
   return (
     <div
-      className={windowsbarClassNames}
+      className={titlebarClassNames}
       style={{
         height: `${windowsBarHeight }px`,
         display: window.fin ? "block" : "none"
       }}
     >
-      <div className="windowsbar-title" style={{
+      <div className="titlebar-title" style={{
         fontSize: `${titleBarFontSize}px`,
       }}>
       {title}
       </div>
-      <div className="windowsbar-controls">
+      <div className="titlebar-controls">
         <MinimizeControl onClick={minimize} height={windowsBarHeight}/>
         <ResizeControl onClick={resize} height={windowsBarHeight}/>
         <CloseControl onClick={close} height={windowsBarHeight}/>
       </div>
-      <div className="windowsbar-actions" style={{ height: `${windowsBarHeight}px`}}>
+      <div className="titlebar-actions" style={{ height: `${windowsBarHeight}px`}}>
         {React.Children.map(children, child =>
           React.cloneElement(child as React.ReactElement, { height: windowsBarHeight })
         )}
@@ -104,4 +103,4 @@ const WindowsBar: React.FC<IWindowsBarProps> = ({ children, title, size, signal 
   );
 };
 
-export default WindowsBar;
+export default TitleBar;

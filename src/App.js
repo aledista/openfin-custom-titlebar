@@ -1,19 +1,27 @@
 import React, { useState } from "react";
-import WindowsBar, { WindowsBarSize } from "./WindowsBar.tsx";
+import TitleBar, { TitleBarSize } from "./TitleBar.tsx";
 import { ActionControl, ActionType } from "./Controls";
-import Signal, { SignalType } from "./Signal";
+import { Signal, SignalType } from "./Signal";
 
-const alertSignal = Signal(SignalType.alert, "this is an alert!");
-const warningSignal = Signal(SignalType.warning, "this is a warning!");
+const alertSignal = Signal(
+  SignalType.alert,
+  "public/alert.ogg",
+  "this is an alert!"
+);
+const warningSignal = Signal(
+  SignalType.warning,
+  "public/warning.ogg",
+  "this is a warning!"
+);
 
 function App() {
   const [signal, setSignal] = useState(null);
 
   return (
     <div className="App">
-      <WindowsBar
-        size={WindowsBarSize.Small}
-        title={"Custom Bar App"}
+      <TitleBar
+        size={TitleBarSize.Small}
+        title={"Custom TitleBar App"}
         signal={signal}
       >
         <ActionControl type={ActionType.Gear} />
@@ -24,7 +32,7 @@ function App() {
             console.log("logging");
           }}
         />
-      </WindowsBar>
+      </TitleBar>
       <div style={{ margin: "10px" }}>
         <button onClick={() => setSignal(alertSignal)}>Send Alert</button>
       </div>

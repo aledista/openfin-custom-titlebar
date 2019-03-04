@@ -24,7 +24,7 @@ export const MinimizeControl: React.FC<IControlProps> = ({
 }) => {
   return (
     <div
-      className="windowsbar-minimize"
+      className="titlebar-minimize"
       onClick={onClick}
       style={{
         height: `${height}px`,
@@ -39,7 +39,7 @@ export const MinimizeControl: React.FC<IControlProps> = ({
 export const ResizeControl: React.FC<IControlProps> = ({ onClick, height }) => {
   return (
     <div
-      className="windowsbar-resize"
+      className="titlebar-resize"
       onClick={onClick}
       style={{
         height: `${height}px`,
@@ -54,7 +54,7 @@ export const ResizeControl: React.FC<IControlProps> = ({ onClick, height }) => {
 export const CloseControl: React.FC<IControlProps> = ({ onClick, height }) => {
   return (
     <div
-      className="windowsbar-close"
+      className="titlebar-close"
       onClick={onClick}
       style={{
         height: `${height}px`,
@@ -81,7 +81,7 @@ export const ActionControl: React.FC<IActionProps> = ({
       break;
   }
   return (
-    <div className="windowsbar-action" style={{ height: `${height}px` }} onClick={onClick}>
+    <div className="titlebar-action" style={{ height: `${height}px` }} onClick={onClick}>
       {svg}
     </div>
   );
